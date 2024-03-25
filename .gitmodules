@@ -1,3 +1,3 @@
-[submodule ".\\content\\dsa"]
-	path = .\\content\\dsa
+[submodule "content/dsa"]
+	path = content/dsa
 	url = https://github.com/ashwincreates/dsa.git
