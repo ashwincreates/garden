@@ -11,8 +11,8 @@ function NoteBookGrid({ notebooks }: { notebooks: string[] }) {
       marginTop={1}
       spacing={2}
     >
-      {notebooks.map((notebook) => (
-        <Grid xs={12} md={4}>
+      {notebooks.map((notebook, index) => (
+        <Grid xs={12} md={4} key={index}>
           <NoteBookCard title={notebook} notebook={notebook}></NoteBookCard>
         </Grid>
       ))}
