@@ -6,7 +6,7 @@ const ROOT = "content";
 
 export async function getNote(notebook: string, note: string = "Index") {
   const markdown = await readFile(
-    path.join(process.cwd(), ROOT, notebook, `${decodeURI(note)}.md`)
+    path.join(process.cwd(), ROOT, notebook, `${note}.md`)
   );
   return parseMarkdown(markdown.toString());
 }
