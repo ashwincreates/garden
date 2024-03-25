@@ -15,7 +15,7 @@ export async function generateStaticParams() {
       const data = await Promise.all(
         notes.map(async (note) => {
           return {
-            note: encodeURI(note),
+            note: note.replace(/ /g, "_"),
             notebook,
           };
         })
@@ -33,7 +33,7 @@ async function Note({
   params: { note: string; notebook: string };
 }) {
   const { note, notebook } = params;
-  const decodedNote = decodeURI(note);
+  const decodedNote = note.replace(/_/g, " ");
   const content = await getNote(notebook, decodedNote);
   return (
     <Container>

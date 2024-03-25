@@ -42,12 +42,12 @@ function NoteList({ notes, notebook }: { notes: string[]; notebook: string }) {
         </Typography>
         <List>
           {notes.map((note, index) => {
-            const notePath = `/${notebook}/${note}`;
-            const isActive = notePath === decodeURI(pathname);
+            const notePath = `/${notebook}/${note.replace(/ /g, "_")}`;
+            const isActive = notePath === pathname.replace(/_/, " ");
             return (
               <ListItem key={index}>
                 <ListItemButton selected={isActive}>
-                  <NavLink href={`/${notebook}/${note}`} passHref legacyBehavior>
+                  <NavLink href={notePath} passHref legacyBehavior>
                     <Link overlay underline="none">
                       <Typography level="body-sm">{note}</Typography>
                     </Link>
