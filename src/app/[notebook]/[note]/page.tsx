@@ -5,6 +5,8 @@ import { getNoteBooks } from "@/server/getNoteBooks";
 import { getNotes } from "@/server/getNotes";
 import { Container, Typography } from "@mui/joy";
 
+export const runtime = "edge";
+
 export async function generateStaticParams() {
   const notebooks = await getNoteBooks();
   const params = await Promise.all(
@@ -32,7 +34,7 @@ async function Note({
 }) {
   const { note, notebook } = params;
   const decodedNote = decodeURIComponent(note);
-  const content = await getNote(notebook, decodedNote)
+  const content = await getNote(notebook, decodedNote);
   return (
     <Container>
       <Typography paddingY={2} level="h4">
