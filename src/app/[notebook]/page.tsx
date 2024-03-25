@@ -1,20 +1,6 @@
 import { getNote } from "@/server/getNote";
-import { getNoteBooks } from "@/server/getNoteBooks";
 import { Container, Typography } from "@mui/joy";
 import Markdown from "@/components/Markdown/Markdown";
-
-export async function generateStaticParams() {
-  const notebooks = await getNoteBooks();
-  const params = await Promise.all(
-    notebooks.map(async (notebook) => {
-      return {
-        notebook,
-      };
-    })
-  );
-
-  return params;
-}
 
 async function NoteBook({ params }: { params: { notebook: string } }) {
   const { notebook } = params;

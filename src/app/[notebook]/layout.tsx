@@ -1,7 +1,22 @@
 import NoteList from "@/components/NoteList/NoteList";
+import { getNoteBooks } from "@/server/getNoteBooks";
 import { getNotes } from "@/server/getNotes";
 import { Stack } from "@mui/joy";
 import { ReactNode } from "react";
+
+export async function generateStaticParams() {
+  const notebooks = await getNoteBooks();
+  const params = await Promise.all(
+    notebooks.map(async (notebook) => {
+      return {
+        notebook,
+      };
+    })
+  );
+
+  return params;
+}
+
 
 interface NoteBookLayoutProps {
   children: ReactNode;
