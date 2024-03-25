@@ -31,7 +31,7 @@ async function Note({
   params: { note: string; notebook: string };
 }) {
   const { note, notebook } = params;
-  const decodedNote = decodeURI(note);
+  const decodedNote = decodeURIComponent(note);
   const content = await getNote(notebook, decodedNote)
   return (
     <Container>
