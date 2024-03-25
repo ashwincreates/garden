@@ -5,6 +5,8 @@ import { getNoteBooks } from "@/server/getNoteBooks";
 import { getNotes } from "@/server/getNotes";
 import { Container, Typography } from "@mui/joy";
 
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   const notebooks = await getNoteBooks();
   const params = await Promise.all(

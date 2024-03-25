@@ -4,6 +4,8 @@ import { getNotes } from "@/server/getNotes";
 import { Stack } from "@mui/joy";
 import { ReactNode } from "react";
 
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   const notebooks = await getNoteBooks();
   const params = await Promise.all(
