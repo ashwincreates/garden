@@ -1,6 +1,8 @@
 import { getNote } from "@/server/getNote";
 import { Container, Typography } from "@mui/joy";
 
+export const runtime = 'edge';
+
 async function NoteBook({ params }: { params: { notebook: string } }) {
   const { notebook } = params;
   const processed = await getNote(notebook, "Index");

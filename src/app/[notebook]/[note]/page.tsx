@@ -2,6 +2,8 @@ import Flower from "@/components/Miscellaneous/Flower";
 import { getNote } from "@/server/getNote";
 import { Container, Typography } from "@mui/joy";
 
+export const runtime = 'edge';
+
 async function Note({
   params,
 }: {
