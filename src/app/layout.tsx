@@ -4,6 +4,7 @@ import { AppHeader } from "@/components/AppHeader/AppHeader";
 import "../../node_modules/prismjs/themes/prism-coy.min.css";
 import "../styles/markdown-light.css";
 import "remark-callouts/styles.css";
+import { MenuStoreProvider } from "@/provider/MenuProvider";
 
 export const metadata: Metadata = {
   title: "gumgum's Garden",
@@ -25,8 +26,10 @@ export default function RootLayout({
       </head>
       <body>
         <ThemeRegistry options={{ key: "joy" }}>
-          <AppHeader />
-          {children}
+          <MenuStoreProvider>
+            <AppHeader />
+            {children}
+          </MenuStoreProvider>
         </ThemeRegistry>
       </body>
     </html>
