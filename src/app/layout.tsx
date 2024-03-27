@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import ThemeRegistry from "./ThemeRegistry";
 import { AppHeader } from "@/components/AppHeader/AppHeader";
-import "../../node_modules/prismjs/themes/prism-coy.min.css";
 import "../styles/markdown-light.css";
 import "remark-callouts/styles.css";
+import "../../node_modules/prismjs/themes/prism-coy.min.css";
 import { MenuStoreProvider } from "@/provider/MenuProvider";
 
 export const metadata: Metadata = {
