@@ -8,6 +8,6 @@ const ROOT = "content";
 export async function getNotes(notebook: string): Promise<string[]> {
   const notes = await readdir(path.join(process.cwd(), ROOT, notebook));
   return notes
-    .filter((note) => note.match(/\.md$/) && !note.match(/index/i))
+    .filter((note) => note.match(/\.md$/))
     .map((note) => note.replace(/\.md$/, ""));
 }

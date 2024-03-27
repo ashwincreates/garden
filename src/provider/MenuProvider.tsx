@@ -1,8 +1,11 @@
 "use client";
 
-import { MenuStore } from "@/store/useMenu";
 import { ReactNode, createContext, useContext, useState } from "react";
 
+type MenuStore = {
+  show: boolean;
+  toggle: () => void;
+};
 export const MenuStoreContext = createContext<MenuStore | null>(null);
 
 export interface MenuStoreProviderProps {

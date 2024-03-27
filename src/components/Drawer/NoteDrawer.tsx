@@ -1,5 +1,5 @@
 "use client";
-import { DialogContent, Drawer, ModalClose } from "@mui/joy";
+import { DialogContent, Drawer } from "@mui/joy";
 import NoteList from "../NoteList/NoteList";
 import { useMenuStore } from "@/provider/MenuProvider";
 
