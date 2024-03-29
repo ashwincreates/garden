@@ -1,8 +1,9 @@
+import BreadCrumbHeader from "@/components/BreadCrumbs/BreadCrumb";
 import NoteDrawer from "@/components/Drawer/NoteDrawer";
 import NoteList from "@/components/NoteList/NoteList";
 import { getNoteBooks } from "@/server/getNoteBooks";
 import { getNotes } from "@/server/getNotes";
-import { Sheet, Stack } from "@mui/joy";
+import { Container, Sheet, Stack } from "@mui/joy";
 import { ReactNode } from "react";
 
 export const dynamicParams = false;
@@ -39,7 +40,7 @@ async function NoteBookLayout({ children, params }: NoteBookLayoutProps) {
         maxWidth={300}
         position={"sticky"}
         top={72}
-        display={{xs: 'none', md: 'block'}}
+        display={{ xs: "none", md: "block" }}
         alignSelf="start"
         height="auto"
       >
