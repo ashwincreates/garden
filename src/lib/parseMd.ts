@@ -30,7 +30,7 @@ function remarkObsidianMark() {
   return (tree: any) => {
     visit(tree, "paragraph", (node) => {
       const paragraph = toString(node);
-      const highlightRegex = /==(.*)==/g;
+      const highlightRegex = /==([^=]+)==/g;
 
       if (paragraph.match(highlightRegex)) {
         const html = paragraph.replace(highlightRegex, (markdown, text) => {
