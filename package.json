@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "cp ./content/**/*.png ./public/images/",
+    "prebuild": "mkdir ./public/images && cp ./content/**/*.png ./public/images/",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
