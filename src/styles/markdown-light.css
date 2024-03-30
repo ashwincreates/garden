@@ -1089,5 +1089,12 @@
 }
 
 .markdown-body .katex {
-    font-size: 1.1em;
+  font-size: 1.1em;
+}
+
+.markdown-body .tag {
+  padding: 0.2rem 0.5rem 0.2rem 0.5rem;
+  font-size: x-small;
+  background-color: #e1e1e1;
+  border-radius: 500px;
 }
