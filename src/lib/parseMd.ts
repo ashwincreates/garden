@@ -90,6 +90,7 @@ async function parseMarkdown(source: string, baseUrl: string = '') {
     .use(remarkWikiLink, {
       pageResolver: (name: string) => [name.replace(/ /g, "_")],
       hrefTemplate: (permaLink: string) => `${baseUrl}/${permaLink}`,
+      aliasDivider: '|'
     })
     .use(remarkObsidianImg)
     .use(remarkObsidianMark)
