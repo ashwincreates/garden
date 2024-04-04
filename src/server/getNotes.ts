@@ -1,5 +1,6 @@
 "use server";
 
+import { filterFiles } from "@/lib/fileUtils";
 import { readdir } from "fs/promises";
 import path from "path";
 
@@ -26,10 +27,5 @@ export async function getNotes(
 
   return pathToNotes
     .map((notePath) => ({ notebook: notePath.split(path.sep) }))
-    .filter(
-      (notePath) =>
-        !notePath.notebook.some(
-          (token) => token.startsWith(".") && !token.endsWith(".md")
-        )
-    );
+    .filter((notePath) => filterFiles(notePath.notebook));
 }
