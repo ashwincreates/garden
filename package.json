@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "mkdir ./public/images && cp ./content/**/*.png ./public/images/",
+    "prebuild": "mkdir ./public/image && find ./content -type f -name '*.png' -exec cp -t ./public/image {} +",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
