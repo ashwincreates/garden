@@ -22,7 +22,7 @@ export function NoteBookCard(props: NoteBookCardProps) {
       invertedColors={true}
     >
       <CardContent sx={{ flexDirection: "column-reverse" }}>
-        <NextLink href={`./${notebook}/Index`}>
+        <NextLink href={`./${notebook}`}>
           <Link
             component="button"
             overlay

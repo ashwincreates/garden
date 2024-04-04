@@ -82,14 +82,14 @@ function remarkObsidianTag() {
   };
 }
 
-async function parseMarkdown(source: string) {
+async function parseMarkdown(source: string, baseUrl: string = '') {
   const parsedString = await unified()
     // parsing markdown
     .use(remarkParse)
     .use(remarkCallouts)
     .use(remarkWikiLink, {
       pageResolver: (name: string) => [name.replace(/ /g, "_")],
-      hrefTemplate: (permaLink: string) => `${permaLink}`,
+      hrefTemplate: (permaLink: string) => `${baseUrl}/${permaLink}`,
     })
     .use(remarkObsidianImg)
     .use(remarkObsidianMark)

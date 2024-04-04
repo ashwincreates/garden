@@ -12,33 +12,19 @@ export async function generateStaticParams() {
   const params = await Promise.all(
     notebooks.map(async (notebook) => {
       const notes = await getNotes(notebook);
-      const data = await Promise.all(
-        notes.map(async (note) => {
-          return {
-            note: note.replace(/ /g, "_"),
-            notebook,
-          };
-        })
-      );
-      return data;
+      return notes;
     })
   );
-
-  return params.reduce((p, c) => [...p, ...c], []);
+  return params.reduce((p, c) => [...p, ...c]);
 }
 
-async function Note({
-  params,
-}: {
-  params: { note: string; notebook: string };
-}) {
-  const { note, notebook } = params;
-  const decodedNote = note.replace(/_/g, " ");
-  const content = await getNote(notebook, decodedNote);
+async function Note({ params }: { params: { notebook: string[] } }) {
+  const { notebook } = params;
+  const content = await getNote(notebook);
   return (
     <Container>
-      <Typography paddingY={2} level="h4">
-        {decodedNote}
+      <Typography paddingY={2} level="h4" textTransform={"capitalize"}>
+        {notebook.reverse()[0].replace(/_/g, ' ')}
       </Typography>
       <Markdown content={content} />
       <footer>

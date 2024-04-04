@@ -5,9 +5,31 @@ import path from "path";
 
 const ROOT = "content";
 
-export async function getNotes(notebook: string): Promise<string[]> {
-  const notes = await readdir(path.join(process.cwd(), ROOT, notebook));
-  return notes
-    .filter((note) => note.match(/\.md$/))
-    .map((note) => note.replace(/\.md$/, ""));
+export async function getNotes(
+  notebook: string
+): Promise<{ notebook: string[] }[]> {
+  const notes = await readdir(path.join(process.cwd(), ROOT, notebook), {
+    recursive: true,
+    withFileTypes: true,
+  });
+  const pathToNotes = notes.map((dirent) =>
+    path.relative(
+      path.join(process.cwd(), ROOT),
+      path.join(
+        dirent.path.replace(/ /, "_"),
+        dirent.name.replace(/.md/, "").replace(/ /g, "_")
+      )
+    )
+  );
+
+  pathToNotes.push(notebook);
+
+  return pathToNotes
+    .map((notePath) => ({ notebook: notePath.split(path.sep) }))
+    .filter(
+      (notePath) =>
+        !notePath.notebook.some(
+          (token) => token.startsWith(".") && !token.endsWith(".md")
+        )
+    );
 }

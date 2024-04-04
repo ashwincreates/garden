@@ -2,10 +2,10 @@
 import { DialogContent, Drawer } from "@mui/joy";
 import NoteList from "../NoteList/NoteList";
 import { useMenuStore } from "@/provider/MenuProvider";
+import { ReactNode } from "react";
 
 interface NoteDrawerProps {
-  notes: string[];
-  notebook: string;
+  children: ReactNode;
 }
 function NoteDrawer(props: NoteDrawerProps) {
   const { show, toggle } = useMenuStore();
@@ -16,7 +16,7 @@ function NoteDrawer(props: NoteDrawerProps) {
       onClose={() => toggle()}
     >
       <DialogContent sx={{ scrollbarWidth: "thin" }}>
-        <NoteList {...props} />
+        {props.children}
       </DialogContent>
     </Drawer>
   );

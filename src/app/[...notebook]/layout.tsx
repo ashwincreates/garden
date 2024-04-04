@@ -1,34 +1,18 @@
-import BreadCrumbHeader from "@/components/BreadCrumbs/BreadCrumb";
 import NoteDrawer from "@/components/Drawer/NoteDrawer";
 import NoteList from "@/components/NoteList/NoteList";
-import { getNoteBooks } from "@/server/getNoteBooks";
-import { getNotes } from "@/server/getNotes";
-import { Container, Sheet, Stack } from "@mui/joy";
+import { getContent } from "@/server/getContent";
+import { Sheet, Stack } from "@mui/joy";
 import { ReactNode } from "react";
 
 export const dynamicParams = false;
 
-export async function generateStaticParams() {
-  const notebooks = await getNoteBooks();
-  const params = await Promise.all(
-    notebooks.map(async (notebook) => {
-      return {
-        notebook,
-      };
-    })
-  );
-
-  return params;
-}
-
 interface NoteBookLayoutProps {
   children: ReactNode;
-  params: {
-    notebook: string;
-  };
+  params: { notebook: string[] };
 }
 async function NoteBookLayout({ children, params }: NoteBookLayoutProps) {
-  const notes = await getNotes(params.notebook);
+  const { notebook } = params;
+  const notes = await getContent(notebook);
   return (
     <Stack
       direction="row"
@@ -37,7 +21,7 @@ async function NoteBookLayout({ children, params }: NoteBookLayoutProps) {
       marginTop={2}
     >
       <Stack
-        maxWidth={300}
+        width={300}
         position={"sticky"}
         top={72}
         display={{ xs: "none", md: "block" }}
@@ -56,10 +40,18 @@ async function NoteBookLayout({ children, params }: NoteBookLayoutProps) {
             scrollbarWidth: "thin",
           }}
         >
-          <NoteList notes={notes} notebook={params.notebook} />
+          <NoteList
+            content={notes.notes}
+            heading={notes.heading}
+          />
         </Sheet>
       </Stack>
-      <NoteDrawer notes={notes} notebook={params.notebook} />
+      <NoteDrawer>
+        <NoteList
+          content={notes.notes}
+          heading={notes.heading}
+        />
+      </NoteDrawer>
       {children}
     </Stack>
   );
