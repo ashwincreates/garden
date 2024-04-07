@@ -21,7 +21,6 @@ async function NoteBookLayout({ children, params }: NoteBookLayoutProps) {
       marginTop={2}
     >
       <Stack
-        width={300}
         position={"sticky"}
         top={72}
         display={{ xs: "none", md: "block" }}
@@ -31,6 +30,7 @@ async function NoteBookLayout({ children, params }: NoteBookLayoutProps) {
         <Sheet
           variant="outlined"
           sx={{
+            width: 300,
             borderTop: 0,
             borderLeft: 0,
             borderBottom: 0,

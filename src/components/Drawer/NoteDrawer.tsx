@@ -11,11 +11,11 @@ function NoteDrawer(props: NoteDrawerProps) {
   const { show, toggle } = useMenuStore();
   return (
     <Drawer
-      sx={{ md: "block", lg: "none" }}
+      sx={{ display: { md: "block", lg: "none" } }}
       open={show}
       onClose={() => toggle()}
     >
-      <DialogContent sx={{ scrollbarWidth: "thin" }}>
+      <DialogContent sx={{ scrollbarWidth: "thin", paddingLeft: "1rem", paddingTop: "1rem" }}>
         {props.children}
       </DialogContent>
     </Drawer>
