@@ -1,6 +1,5 @@
 "use client";
 import { DialogContent, Drawer } from "@mui/joy";
-import NoteList from "../NoteList/NoteList";
 import { useMenuStore } from "@/provider/MenuProvider";
 import { ReactNode } from "react";
 
