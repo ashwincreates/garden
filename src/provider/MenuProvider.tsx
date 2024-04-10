@@ -1,10 +1,18 @@
 "use client";
 
-import { ReactNode, createContext, useContext, useState } from "react";
+import {
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 type MenuStore = {
   show: boolean;
+  search: boolean;
   toggle: () => void;
+  toggleSearch: () => void;
 };
 export const MenuStoreContext = createContext<MenuStore | null>(null);
 
@@ -14,9 +22,25 @@ export interface MenuStoreProviderProps {
 
 export const MenuStoreProvider = ({ children }: MenuStoreProviderProps) => {
   const [show, setShow] = useState(false);
+  const [search, setSearch] = useState(false);
   const toggle = () => setShow((show) => !show);
+  const toggleSearch = () => setSearch((search) => !search);
+
+  useEffect(() => {
+    const toggleSearchFromKey = (ev: KeyboardEvent) => {
+      ev.preventDefault()
+      if (ev.ctrlKey && ev.key === 'k') {
+        toggleSearch()
+      }
+    };
+
+    window.addEventListener("keydown", toggleSearchFromKey);
+
+    return () => window.removeEventListener("keydown", toggleSearchFromKey);
+  }, []);
+
   return (
-    <MenuStoreContext.Provider value={{ show, toggle }}>
+    <MenuStoreContext.Provider value={{ show, toggle, search, toggleSearch }}>
       {children}
     </MenuStoreContext.Provider>
   );

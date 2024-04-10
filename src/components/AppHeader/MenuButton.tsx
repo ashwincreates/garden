@@ -4,11 +4,10 @@ import { Bars2Icon } from "@heroicons/react/24/outline";
 import { IconButton } from "@mui/joy";
 
 function MenuButton() {
-  const { toggle, show } = useMenuStore();
+  const { toggle } = useMenuStore();
   return (
     <IconButton
       onClick={() => {
-        console.log("clicked", show)
         toggle();
       }}
       sx={{ display: { md: "block", lg: "none" } }}

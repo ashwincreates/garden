@@ -5,6 +5,7 @@ import "../styles/markdown-light.css";
 import "remark-callouts/styles.css";
 import "../../node_modules/prismjs/themes/prism-coy.min.css";
 import { MenuStoreProvider } from "@/provider/MenuProvider";
+import SearchModal from "@/components/SearchModal/SearchModal";
 
 export const metadata: Metadata = {
   title: "gumgum's Garden",
@@ -28,6 +29,7 @@ export default function RootLayout({
         <ThemeRegistry options={{ key: "joy" }}>
           <MenuStoreProvider>
             <AppHeader />
+            <SearchModal/>
             {children}
           </MenuStoreProvider>
         </ThemeRegistry>
