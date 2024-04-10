@@ -28,15 +28,14 @@ export const MenuStoreProvider = ({ children }: MenuStoreProviderProps) => {
 
   useEffect(() => {
     const toggleSearchFromKey = (ev: KeyboardEvent) => {
-      ev.preventDefault()
       if (ev.ctrlKey && ev.key === 'k') {
         toggleSearch()
       }
     };
 
-    window.addEventListener("keydown", toggleSearchFromKey);
+    document.addEventListener("keydown", toggleSearchFromKey);
 
-    return () => window.removeEventListener("keydown", toggleSearchFromKey);
+    return () => document.removeEventListener("keydown", toggleSearchFromKey);
   }, []);
 
   return (
