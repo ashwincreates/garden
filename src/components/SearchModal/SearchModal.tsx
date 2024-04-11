@@ -20,17 +20,24 @@ interface AlgoOption {
 }
 
 const client = algoliasearch("15WSRQBM95", "e71a36bb01ffd53a64a0e257cd4d57f2");
+const index = client.initIndex("garden");
 
 function SearchModal() {
   const { search, toggleSearch } = useMenuStore();
   const [options, setOptions] = useState<AlgoOption[]>([]);
+  const [searchString, setSearchString] = useState<string>("");
   const [selectedOption, setSelectedOption] = useState<AlgoOption | null>(null);
   const router = useRouter();
 
   useEffect(() => {
-    const index = client.initIndex("garden");
     index.search("").then(({ hits }) => setOptions(hits as AlgoOption[]));
   }, []);
+
+  useEffect(() => {
+    index
+      .search(searchString)
+      .then(({ hits }) => setOptions(hits as AlgoOption[]));
+  }, [searchString]);
 
   return (
     <Modal open={search} onClose={toggleSearch}>
@@ -49,6 +56,7 @@ function SearchModal() {
       >
         <Autocomplete
           options={options}
+          autoFocus
           onHighlightChange={(e, option) => setSelectedOption(option)}
           endDecorator={<Kbd>Esc</Kbd>}
           renderOption={(props, option) => (
@@ -56,6 +64,7 @@ function SearchModal() {
               <Typography startDecorator={<DocumentIcon height={16} />}>
                 {option.title}
               </Typography>
+              <Typography level='body-xs'>{option.link}</Typography>
             </AutocompleteOption>
           )}
           getOptionLabel={(option) =>
@@ -63,6 +72,7 @@ function SearchModal() {
           }
           variant="plain"
           forcePopupIcon={false}
+          onInputChange={(e, value) => setSearchString(value)}
           placeholder="Search"
           autoHighlight
           sx={{

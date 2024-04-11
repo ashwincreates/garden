@@ -10,7 +10,7 @@ function SearchButton() {
     <>
       <Button
         size="sm"
-        sx={{ display: { xs: "none", sm: "inline-flex" } }}
+        sx={{ display: { xs: "none", sm: "inline-flex" }, alignSelf: 'center' }}
         variant={"soft"}
         color="neutral"
         endDecorator={<Kbd>CtrlK</Kbd>}
