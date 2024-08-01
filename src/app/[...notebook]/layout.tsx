@@ -5,6 +5,7 @@ import { Sheet, Stack } from "@mui/joy";
 import { ReactNode } from "react";
 
 export const dynamicParams = false;
+export const runtime = 'edge';
 
 interface NoteBookLayoutProps {
   children: ReactNode;
