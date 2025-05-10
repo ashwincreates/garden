@@ -1,22 +1,12 @@
-"use client"
-import { Grid } from "@mui/joy";
 import { NoteBookCard } from "./NoteBookCard";
 
 function NoteBookGrid({ notebooks }: { notebooks: string[] }) {
   return (
-    <Grid
-      container
-      maxWidth="md"
-      marginX={{ xs: 2, md: "auto" }}
-      marginTop={1}
-      spacing={2}
-    >
+    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-6xl m-auto py-4 px-4">
       {notebooks.map((notebook, index) => (
-        <Grid xs={12} md={4} key={index}>
-          <NoteBookCard title={notebook} notebook={notebook}></NoteBookCard>
-        </Grid>
+        <NoteBookCard title={notebook} notebook={notebook}></NoteBookCard>
       ))}
-    </Grid>
+    </div>
   );
 }
 

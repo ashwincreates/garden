@@ -3,7 +3,6 @@ import Flower from "@/components/Miscellaneous/Flower";
 import { getNote } from "@/server/getNote";
 import { getNoteBooks } from "@/server/getNoteBooks";
 import { getNotes } from "@/server/getNotes";
-import { Container, Typography } from "@mui/joy";
 
 export const dynamicParams = false;
 
@@ -22,19 +21,19 @@ async function Note({ params }: { params: { notebook: string[] } }) {
   const { notebook } = params;
   const content = await getNote(notebook);
   return (
-    <Container>
-      <Typography paddingY={2} level="h4" textTransform={"capitalize"}>
+    <div className="p-4 w-full">
+      <h3 className="text-lg font-semibold py-2 capitalize">
         {notebook.reverse()[0].replace(/_/g, ' ')}
-      </Typography>
+      </h3>
       <Markdown content={content} />
       <footer>
-        <Typography textAlign={"center"} padding={1}>
+        <h4 className="p-1 flex justify-center">
           <Flower />
           <Flower />
           <Flower />
-        </Typography>
+        </h4>
       </footer>
-    </Container>
+    </div>
   );
 }
 

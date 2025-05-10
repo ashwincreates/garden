@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
-import ThemeRegistry from "./ThemeRegistry";
 import { AppHeader } from "@/components/AppHeader/AppHeader";
 import "../styles/markdown-light.css";
+import "../styles/global.css";
 import "remark-callouts/styles.css";
 import "../../node_modules/prismjs/themes/prism-coy.min.css";
-import { MenuStoreProvider } from "@/provider/MenuProvider";
-import SearchModal from "@/components/SearchModal/SearchModal";
+import { SidebarProvider } from "@/components/ui/sidebar";
 
 export const metadata: Metadata = {
   title: "gumgum's Garden",
@@ -26,13 +25,8 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <ThemeRegistry options={{ key: "joy" }}>
-          <MenuStoreProvider>
-            <AppHeader />
-            <SearchModal/>
-            {children}
-          </MenuStoreProvider>
-        </ThemeRegistry>
+        <AppHeader />
+        {children}
       </body>
     </html>
   );

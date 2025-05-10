@@ -1,34 +1,31 @@
 "use client";
 import { useMenuStore } from "@/provider/MenuProvider";
-import { Button, IconButton } from "@mui/joy";
 import Kbd from "../Miscellaneous/KeyBoard";
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { Button } from "../ui/button";
+import { Search } from "lucide-react";
 
 function SearchButton() {
-  const { toggleSearch } = useMenuStore();
   return (
     <>
       <Button
         size="sm"
-        sx={{ display: { xs: "none", sm: "inline-flex" }, alignSelf: 'center' }}
-        variant={"soft"}
+        className="hidden sm:inline-flex self-center"
+        variant={"outline"}
         color="neutral"
-        endDecorator={<Kbd>CtrlK</Kbd>}
         onClick={() => {
-          toggleSearch();
         }}
       >
         Search..
+        <Kbd>Ctrl</Kbd> + <Kbd>K</Kbd>
       </Button>
-      <IconButton
-        sx={{ display: { xs: "block", sm: "none" } }}
-        variant="outlined"
+      <Button
+        className="sm:hidden"
+        variant="outline"
         onClick={() => {
-          toggleSearch();
         }}
       >
-        <MagnifyingGlassIcon height={16} strokeWidth={2} />
-      </IconButton>
+        <Search height={16} strokeWidth={2} />
+      </Button>
     </>
   );
 }

@@ -1,7 +1,5 @@
-"use client";
-import { Card, CardContent, Link, Typography } from "@mui/joy";
 import NextLink from "next/link";
-import { useState } from "react";
+import { Card, CardContent } from "../ui/card";
 
 interface NoteBookCardProps {
   title: string;
@@ -9,35 +7,16 @@ interface NoteBookCardProps {
 }
 export function NoteBookCard(props: NoteBookCardProps) {
   const { title, notebook } = props;
-  const [hover, setHover] = useState(false);
   return (
     <Card
-      sx={{
-        flexGrow: 1,
-        height: 150,
-        transition: "all 50ms ease-in-out",
-      }}
-      variant={hover ? "solid" : "soft"}
+      className="h-[150px] transition-all ease-in-outflex flex-col-reverse "
       color="primary"
-      invertedColors={true}
     >
-      <CardContent sx={{ flexDirection: "column-reverse" }}>
+      <CardContent>
         <NextLink href={`./${notebook}`}>
-          <Link
-            component="button"
-            overlay
-            underline="none"
-            onMouseEnter={() => setHover(true)}
-            onMouseLeave={() => setHover(false)}
-          >
-            <Typography
-              level="body-lg"
-              fontWeight="lg"
-              textTransform="capitalize"
-            >
-              {title}
-            </Typography>
-          </Link>
+          <h3 className="text-lg font-semibold leading-none capitalize">
+            {title}
+          </h3>
         </NextLink>
       </CardContent>
     </Card>

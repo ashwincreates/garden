@@ -1,19 +1,12 @@
-import { Typography } from "@mui/joy";
 import { PropsWithChildren } from "react";
 
 function Kbd(props: PropsWithChildren) {
   return (
-    <Typography
-      component={"kbd"}
-      padding={".25rem"}
-      boxShadow={"inset 0 -1px 0 0 #cdcdcd"}
-      level="body-sm"
-      variant="outlined"
-      borderRadius="sm"
-      sx={{ display: { xs: "none", sm: "block" } }}
+    <kbd
+      className="hidden sm:block bg-muted px-1.5 py-0.5 rounded text-[10px] font-semibold text-muted-foreground"
     >
       {props.children}
-    </Typography>
+    </kbd>
   );
 }
 

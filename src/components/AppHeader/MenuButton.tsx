@@ -1,19 +1,18 @@
 "use client";
-import { useMenuStore } from "@/provider/MenuProvider";
-import { Bars2Icon } from "@heroicons/react/24/outline";
-import { IconButton } from "@mui/joy";
+import { Button } from "../ui/button";
+import { Menu } from "lucide-react"
 
 function MenuButton() {
-  const { toggle } = useMenuStore();
   return (
-    <IconButton
+    <Button
+      variant={"outline"}
+      size={"icon"}
       onClick={() => {
-        toggle();
       }}
-      sx={{ display: { md: "block", lg: "none" } }}
+      className="lg:hidden"
     >
-      <Bars2Icon />
-    </IconButton>
+      <Menu />
+    </Button>
   );
 }
 
