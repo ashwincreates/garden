@@ -13,7 +13,7 @@ async function NoteBookLayout({ children, params }: NoteBookLayoutProps) {
   const { notebook } = params;
   const notes = await getContent(notebook);
   return (
-    <SidebarProvider className="max-w-6xl mx-auto">
+    <>
       <Sidebar className="top-[56px]">
         <SidebarContent>
           <NoteList
@@ -23,7 +23,7 @@ async function NoteBookLayout({ children, params }: NoteBookLayoutProps) {
         </SidebarContent>
       </Sidebar>
       {children}
-    </SidebarProvider>
+    </>
   );
 }
 

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { AppHeader } from "@/components/AppHeader/AppHeader";
+import { ThemeProvider } from "next-themes";
 import "../styles/markdown-light.css";
 import "../styles/global.css";
 import "remark-callouts/styles.css";
@@ -25,8 +25,16 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <AppHeader />
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <SidebarProvider className="flex-col">
+            {children}
+          </SidebarProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

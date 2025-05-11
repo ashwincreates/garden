@@ -1,18 +1,9 @@
 "use client";
-import { Button } from "../ui/button";
-import { Menu } from "lucide-react"
+import { SidebarTrigger } from "../ui/sidebar";
 
 function MenuButton() {
   return (
-    <Button
-      variant={"outline"}
-      size={"icon"}
-      onClick={() => {
-      }}
-      className="lg:hidden"
-    >
-      <Menu />
-    </Button>
+    <SidebarTrigger className="md:hidden" />
   );
 }
 
