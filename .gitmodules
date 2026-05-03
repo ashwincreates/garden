@@ -1,6 +1,3 @@
 [submodule "content/dsa"]
 	path = content/dsa
 	url = https://github.com/ashwincreates/dsa.git
-[submodule "content/aoc"]
-	path = content/aoc
-	url = https://github.com/ashwincreates/Advent-of-Code.git
