@@ -1,5 +1,9 @@
 import NoteList from "@/components/NoteList/NoteList";
-import { Sidebar, SidebarContent, SidebarProvider } from "@/components/ui/sidebar";
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarProvider,
+} from "@/components/ui/sidebar";
 import { getContent } from "@/server/getContent";
 import { ReactNode } from "react";
 
@@ -15,11 +19,8 @@ async function NoteBookLayout({ children, params }: NoteBookLayoutProps) {
   return (
     <>
       <Sidebar>
-        <SidebarContent>
-          <NoteList
-            content={notes.notes}
-            heading={notes.heading}
-          />
+        <SidebarContent className="overflow-hidden bg-[#1a1814]">
+          <NoteList content={notes.notes} heading={notes.heading} />
         </SidebarContent>
       </Sidebar>
       {children}

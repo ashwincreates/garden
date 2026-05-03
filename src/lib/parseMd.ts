@@ -9,6 +9,10 @@ import remarkGFM from "remark-gfm";
 import remarkWikiLink from "remark-wiki-link";
 import remarkCallouts from "remark-callouts";
 import rehypeStringify from "rehype-stringify";
+import remarkExtractToc from "remark-extract-toc";
+import rehypeSlug from "rehype-slug";
+import Slugger from "github-slugger";
+
 import { unified } from "unified";
 
 function remarkObsidianImg() {
@@ -37,7 +41,7 @@ function remarkObsidianMark() {
           if (
             node.children.some(
               ({ value, type }: { value: string; type: string }) =>
-                value === markdown && type === "inlineCode"
+                value === markdown && type === "inlineCode",
             )
           ) {
             return markdown;
@@ -83,9 +87,26 @@ function remarkObsidianTag() {
   };
 }
 
+function remarkHeadingSlugs() {
+  return (tree: any) => {
+    const slugger = new Slugger();
+    visit(tree, "heading", (node: any) => {
+      const text = toString(node);
+      node.id = slugger.slug(text);
+    });
+  };
+}
+
 async function parseMarkdown(source: string, baseUrl: string = "") {
+  const parsedTOC = await unified()
+    .use(remarkParse)
+    .use(remarkHeadingSlugs)
+    .use(remarkExtractToc, { keys: ["id"] })
+    .process(source);
+
+  const toc = parsedTOC.result || [];
+
   const parsedString = await unified()
-    // parsing markdown
     .use(remarkParse)
     .use(remarkCallouts)
     .use(remarkWikiLink, {
@@ -99,14 +120,19 @@ async function parseMarkdown(source: string, baseUrl: string = "") {
     .use(remarkObsidianTag)
     .use(remarkGFM)
     .use(remarkMath)
-    // markdown to html
+
+    // 👇 CONVERT FIRST
     .use(remarkRehype, { allowDangerousHtml: true })
+
+    // 👇 THEN rehype plugins
+    .use(rehypeSlug)
     .use(rehypeKatex)
     .use(rehypeShiki, { theme: "github-light-default" })
-    // serializing html
+
     .use(rehypeStringify, { allowDangerousHtml: true })
     .process(source);
-  return parsedString.toString();
+
+  return { markdown: parsedString.toString(), toc };
 }
 
 export default parseMarkdown;

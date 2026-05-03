@@ -11,7 +11,11 @@ async function Home() {
       <AppHeader />
       <div>
         <div className="overflow-hidden">
-          <Image className="h-[400px] object-cover" src={heroImage} alt="The Garden" />
+          <Image
+            className="h-[400px] object-cover object-top"
+            src={heroImage}
+            alt="The Garden"
+          />
         </div>
         <NoteBookGrid notebooks={notebooks} />
       </div>

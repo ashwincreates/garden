@@ -9,7 +9,7 @@ import path from "path";
 const ROOT = "content";
 
 export async function getContent(
-  currentNote: Note
+  currentNote: Note,
 ): Promise<{ notes: { note: Note }[]; heading: string }> {
   // remove spaces
   const note: Note = currentNote.map((token) => token.replace(/_/g, " "));
@@ -35,10 +35,10 @@ export async function getContent(
     path.relative(
       path.join(process.cwd(), ROOT),
       path.join(
-        dirent.path.replace(/.md/, "").replace(/ /g, "_"),
-        // dirent.name.replace(/.md/, "").replace(/ /g, "_")
-      )
-    )
+        dirent.path.replace(/ /g, "_"),
+        dirent.name.replace(/.md/, "").replace(/ /g, "_"),
+      ),
+    ),
   );
 
   return {

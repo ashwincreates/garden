@@ -25,7 +25,6 @@ function NoteList({
   return (
     <aside
       className="
-        w-[260px] min-h-screen shrink-0
         bg-[#1a1814]
         text-[#f5f2ed]
         border-r border-white/5
@@ -91,50 +90,44 @@ function NoteList({
               </SidebarMenuItem>
 
               <div className="max-h-[calc(100vh-220px)] overflow-y-auto pr-1">
+                {/* Notes */}
+                {content.map(({ note }, index) => {
+                  const notePath = `/${note.join("/").replace(/ /g, "_")}`;
+                  const isActive = pathname === notePath;
 
+                  const title = [...note].reverse()[0].replace(/_/g, " ");
 
-              {/* Notes */}
-              {content.map(({ note }, index) => {
-                const notePath = `/${note.join("/").replace(/ /g, "_")}`;
-                const isActive = pathname === notePath;
-
-                const title = [...note]
-                  .reverse()[0]
-                  .replace(/_/g, " ");
-
-                return (
-                  <SidebarMenuItem key={index}>
-                    <NavLink href={notePath} className="block">
-                      <SidebarMenuButton
-                        className={cn(
-                          `
+                  return (
+                    <SidebarMenuItem key={index}>
+                      <NavLink href={notePath} className="block">
+                        <SidebarMenuButton
+                          className={cn(
+                            `
                           w-full rounded-none h-auto
                           px-5 py-2.5
                           flex items-center gap-3
                           border-l-2 transition-all
                           focus:bg-transparent
                         `,
-                          isActive
-                            ? "border-[#c8742a] bg-[#c8742a]/10 hover:bg-[#c8742a]/15 text-[#e8c89a] hover:text-white/85"
-                            : "border-transparent text-white/55 hover:bg-white/5 hover:text-white/85"
-                        )}
-                      >
-                        <FileText size={14} className="shrink-0" />
+                            isActive
+                              ? "border-[#c8742a] bg-[#c8742a]/10 hover:bg-[#c8742a]/15 text-[#e8c89a] hover:text-white/85"
+                              : "border-transparent text-white/55 hover:bg-white/5 hover:text-white/85",
+                          )}
+                        >
+                          <FileText size={14} className="shrink-0" />
 
-                        <span className="text-[13px] truncate">
-                          {title}
-                        </span>
+                          <span className="text-[13px] truncate">{title}</span>
 
-                        <ChevronRight
-                          size={13}
-                          className="ml-auto opacity-40"
-                        />
-                      </SidebarMenuButton>
-                    </NavLink>
-                  </SidebarMenuItem>
-                );
-              })}
-                            </div>
+                          <ChevronRight
+                            size={13}
+                            className="ml-auto opacity-40"
+                          />
+                        </SidebarMenuButton>
+                      </NavLink>
+                    </SidebarMenuItem>
+                  );
+                })}
+              </div>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>

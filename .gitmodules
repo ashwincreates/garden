@@ -1,6 +1,3 @@
-[submodule "content/dsa"]
-	path = content/dsa
-	url = https://github.com/ashwincreates/dsa.git
 [submodule "content/DSA"]
 	path = content/DSA
 	url = https://github.com/ashwincreates/dsa.git

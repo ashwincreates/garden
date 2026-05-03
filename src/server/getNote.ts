@@ -1,34 +1,47 @@
 import parseMarkdown from "@/lib/parseMd";
 import { Note } from "@/types/Note";
-import { statSync } from "fs";
+import { stat } from "fs/promises";
 import { readFile } from "fs/promises";
 import path from "path";
 
 const ROOT = "content";
 
-export async function getNote(notebook: Note) {
-  let note = path.join(
+function resolveNotePath(notebook: Note) {
+  const basePath = path.join(
     process.cwd(),
     ROOT,
-    ...notebook.map((token) => token.replace(/_/g, " "))
+    ...notebook.map((t) => t.replace(/_/g, " ")),
   );
-  let baseUrl = "";
+
+  return {
+    basePath,
+    indexPath: path.join(basePath, "Index.md"),
+    filePath: `${basePath}.md`,
+    baseUrl: notebook.at(-1) ?? "",
+  };
+}
+
+export async function getNote(notebook: Note) {
+  const { basePath, indexPath, filePath, baseUrl } = resolveNotePath(notebook);
+
+  let finalPath: string;
+
+  // check if directory
   try {
-    // assuming it's a directory
-    if (statSync(note).isDirectory()) {
-      note = path.join(note, "Index.md");
-      baseUrl = [...notebook].reverse()[0];
-    }
+    const stats = await stat(basePath);
+    finalPath = stats.isDirectory() ? indexPath : filePath;
   } catch {
-    // not a directory
-    note = `${note}.md`;
+    // fallback to file
+    finalPath = filePath;
   }
 
-  let markdown = null;
+  let markdown: string;
+
   try {
-     markdown = await readFile(`${note}`);
-  } catch (err) {
+    markdown = await readFile(finalPath, "utf-8");
+  } catch {
     throw new Error(`Note not found: ${notebook.join("/")}`);
   }
-  return parseMarkdown(markdown.toString(), baseUrl);
+
+  return parseMarkdown(markdown, baseUrl);
 }

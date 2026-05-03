@@ -2,7 +2,7 @@ import { NoteBookCard } from "./NoteBookCard";
 
 function NoteBookGrid({ notebooks }: { notebooks: string[] }) {
   return (
-    <section className="w-full border-b border-[#e2ddd5] bg-[#f5f2ed]">
+    <section className="w-full  bg-[#f5f2ed]">
       <div className="max-w-7xl mx-auto px-6 md:px-12 py-14">
         {/* Section Heading */}
         <div className="flex items-center gap-4 mb-10">
