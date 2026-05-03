@@ -23,6 +23,12 @@ export async function getNote(notebook: Note) {
     // not a directory
     note = `${note}.md`;
   }
-  const markdown = await readFile(`${note}`);
+
+  let markdown = null;
+  try {
+     markdown = await readFile(`${note}`);
+  } catch (err) {
+    throw new Error(`Note not found: ${notebook.join("/")}`);
+  }
   return parseMarkdown(markdown.toString(), baseUrl);
 }

@@ -35,8 +35,8 @@ export async function getContent(
     path.relative(
       path.join(process.cwd(), ROOT),
       path.join(
-        dirent.path.replace(/ /, "_"),
-        dirent.name.replace(/.md/, "").replace(/ /g, "_")
+        dirent.path.replace(/.md/, "").replace(/ /g, "_"),
+        // dirent.name.replace(/.md/, "").replace(/ /g, "_")
       )
     )
   );

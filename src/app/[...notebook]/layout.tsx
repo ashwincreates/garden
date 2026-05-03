@@ -14,7 +14,7 @@ async function NoteBookLayout({ children, params }: NoteBookLayoutProps) {
   const notes = await getContent(notebook);
   return (
     <>
-      <Sidebar className="top-[56px]">
+      <Sidebar>
         <SidebarContent>
           <NoteList
             content={notes.notes}
